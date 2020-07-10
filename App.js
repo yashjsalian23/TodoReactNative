@@ -26,19 +26,29 @@ export default function App() {
         <Button title="add" onPress={addGoalHandler} />
       </View>  
       <View>
-        {courseGoals.map(item => <Text key={Math.random()}>{item}</Text>)}
+        {courseGoals.map(item => <View key={Math.random()} style={styles.listItem} ><Text >{item}</Text></View>)}
       </View> 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+
   container: {
     padding: 30
   },
+
   textField: {
     borderBottomColor: "black",
     borderBottomWidth: 2,
     marginBottom: 10
+  }, 
+
+  listItem: {
+    marginVertical: 10,
+    padding: 10,
+    backgroundColor: "#ccc",
+    borderColor: "black",
+    borderWidth: 1
   }
 });
