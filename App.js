@@ -1,52 +1,56 @@
-//import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, View, FlatList, Button} from 'react-native';
+import { StyleSheet, View, Button, FlatList } from 'react-native';
 
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
 export default function App() {
+  const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
 
-  let [courseGoals, setCourseGoals] = useState([]);
-  // let [showModal, setShowModal] = useState(false);
-
-  let addGoalHandler = (enterdGoal) => {
+  const addGoalHandler = goalTitle => {
     setCourseGoals(currentGoals => [
       ...currentGoals,
-      {
-        key: Math.random().toString(),
-        value: enterdGoal
-      }
+      { id: Math.random().toString(), value: goalTitle }
     ]);
-  }
+    setIsAddMode(false);
+  };
 
-  let onDeleteHandler = goalId => {
-    console.log(goalId)
+  const removeGoalHandler = goalId => {
     setCourseGoals(currentGoals => {
-      return currentGoals.filter((goal) => goal.key!==goalId);
+      return currentGoals.filter(goal => goal.id !== goalId);
     });
-  }
+  };
+
+  const cancelGoalAdditionHandler = () => {
+    setIsAddMode(false);
+  };
 
   return (
-    <View style={styles.container}>
-      {/* <Button title="Add Goal" onPress={() => setShowModal(true)} /> */}
-
-      <GoalInput addGoal={addGoalHandler} />
-    
-      <FlatList  
-        data={courseGoals} 
-        renderItem = {itemData => 
-          <GoalItem 
-          title={itemData.item.value} 
-          id={itemData.item.key}
-          onDelete={onDeleteHandler} /> }  />
-        
+    <View style={styles.screen}>
+      <Button title="Add New Goal" onPress={() => setIsAddMode(true)} />
+      <GoalInput
+        visible={isAddMode}
+        onAddGoal={addGoalHandler}
+        onCancel={cancelGoalAdditionHandler}
+      />
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={courseGoals}
+        renderItem={itemData => (
+          <GoalItem
+            id={itemData.item.id}
+            onDelete={removeGoalHandler}
+            title={itemData.item.value}
+          />
+        )}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 30
+  screen: {
+    padding: 50
   }
 });

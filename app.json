@@ -21,6 +21,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Simple Todo App",
+    "githubUrl": "https://github.com/yashjsalian23/TodoReactNative.git"
   }
 }
