@@ -19,13 +19,24 @@ export default function App() {
     ]);
   }
 
+  let onDeleteHandler = goalId => {
+    console.log(goalId)
+    setCourseGoals(currentGoals => {
+      return currentGoals.filter((goal) => goal.key!==goalId);
+    });
+  }
+
   return (
     <View style={styles.container}>
       <GoalInput addGoal={addGoalHandler} />
     
       <FlatList  
         data={courseGoals} 
-        renderItem = {itemData => <GoalItem title={itemData.item.value} /> }  />
+        renderItem = {itemData => 
+          <GoalItem 
+          title={itemData.item.value} 
+          id={itemData.item.key}
+          onDelete={onDeleteHandler} /> }  />
         
     </View>
   );
