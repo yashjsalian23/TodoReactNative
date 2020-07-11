@@ -1,6 +1,6 @@
 //import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, FlatList} from 'react-native';
+import { StyleSheet, View, FlatList, Button} from 'react-native';
 
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
@@ -8,6 +8,7 @@ import GoalInput from './components/GoalInput';
 export default function App() {
 
   let [courseGoals, setCourseGoals] = useState([]);
+  // let [showModal, setShowModal] = useState(false);
 
   let addGoalHandler = (enterdGoal) => {
     setCourseGoals(currentGoals => [
@@ -28,6 +29,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      {/* <Button title="Add Goal" onPress={() => setShowModal(true)} /> */}
+
       <GoalInput addGoal={addGoalHandler} />
     
       <FlatList  
