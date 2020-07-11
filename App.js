@@ -7,14 +7,9 @@ import GoalInput from './components/GoalInput';
 
 export default function App() {
 
-  let [enterdGoal, setEnteredGoal] = useState('');
   let [courseGoals, setCourseGoals] = useState([]);
 
-  let inputChangeHandler = enteredText => {
-    setEnteredGoal(enteredText);
-  }
-
-  let addGoalHandler = () => {
+  let addGoalHandler = (enterdGoal) => {
     setCourseGoals(currentGoals => [
       ...currentGoals,
       {
@@ -26,7 +21,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <GoalInput inputChange={inputChangeHandler} addGoal={addGoalHandler} />
+      <GoalInput addGoal={addGoalHandler} />
     
       <FlatList  
         data={courseGoals} 
